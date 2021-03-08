@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Teploty</title>
+
+    <script>
+    var tempsBlue;
+    var timeBlue;
+    var tempBlue;
+    var prumerBlue;
+    var minBlue;
+    var maxBlue;
+
+    var tempsBlack
+    var timeBlack;
+    var tempBlack;
+    var prumerBlack;
+    var minBlack;
+    var maxBlack;
+
+    var tempsRed
+    var timeRed;
+    var tempRed;
+    var prumerRed;
+    var minRed;
+    var maxRed;
+
+    var tempsPink
+    var timePink;
+    var tempPink;
+    var prumerPink;
+    var minPink;
+    var maxPink;
+
+    var tempsGreen
+    var timeGreen;
+    var tempGreen;
+    var prumerGreen;
+    var minGreen;
+    var maxGreen;
+
+    var timeBlue1;
+    var timeBlue2;
+    var timeBlack1;
+    var timeBlack2;
+    var timeRed1;
+    var timeRed2;
+    var timeGreen1;
+    var timeGreen2;
+    var timePink1;
+    var timePink2;
+
+    function getData(){
+
+      var request = new XMLHttpRequest();
+      request.open("GET", "jsonir.json", false)
+      request.send(null)
+      var jsonn = JSON.parse(request.responseText)
+      //console.log(jsonn.blue.data[0])
+
+
+      tempsBlue = jsonn.blue.data;
+      tempsBlack = jsonn.black.data;
+      tempsRed = jsonn.red.data;
+      tempsGreen = jsonn.green.data;
+      tempsPink = jsonn.pink.data;
+
+      lenBlue = tempsBlue.length;
+      lenBlack = tempsBlack.length;
+      lenRed = tempsRed.length;
+      lenGreen = tempsGreen.length;
+      lenPink = tempsPink.length;
+
+      timeBlue = jsonn.blue.time;
+      tempBlue = jsonn.blue.data[lenBlue-1];
+      prumerBlue = jsonn.blue.avg;
+      minBlue = jsonn.blue.min;
+      maxBlue = jsonn.blue.max;
+
+      timeBlack = jsonn.black.time;
+      tempBlack = jsonn.black.data[lenBlack-1];
+      prumerBlack = jsonn.black.avg;
+      minBlack = jsonn.black.min;
+      maxBlack = jsonn.black.max;
+
+      timeRed = jsonn.red.time;
+      tempRed = jsonn.red.data[lenRed-1];
+      prumerRed = jsonn.red.avg;
+      minRed = jsonn.red.min;
+      maxRed = jsonn.red.max;
+
+      timePink = jsonn.pink.time;
+      tempPink = jsonn.pink.data[lenPink-1];
+      prumerPink = jsonn.pink.avg;
+      minPink = jsonn.pink.min;
+      maxPink = jsonn.pink.max;
+
+      timeGreen = jsonn.green.time;
+      tempGreen = jsonn.green.data[lenGreen-1];
+      prumerGreen = jsonn.green.avg;
+      minGreen = jsonn.green.min;
+      maxGreen = jsonn.green.max;
+
+    }
+
+    function onload(){
+      console.log('loaded.')
+      getData();
+      setInterval(getData(), 2000);
+
+      document.getElementById("dateBlue").innerHTML = "Čas poslední aktualizace: "+new Date(timeBlue);
+      document.getElementById("aktualBlue").innerHTML = "Aktuální: "+tempBlue+" °C";
+      document.getElementById("prumerBlue").innerHTML = "Průměrná: "+prumerBlue+" °C";
+      document.getElementById("maxBlue").innerHTML = "Maximum: "+maxBlue+" °C";
+      document.getElementById("minBlue").innerHTML = "Minimum: "+minBlue+" °C";
+
+      document.getElementById("dateBlack").innerHTML = "Čas poslední aktualizace: "+new Date(timeBlack);
+      document.getElementById("aktualBlack").innerHTML = "Aktuální: "+tempBlack+" °C";
+      document.getElementById("prumerBlack").innerHTML = "Průměrná: "+prumerBlack+" °C";
+      document.getElementById("maxBlack").innerHTML = "Maximum: "+maxBlack+" °C";
+      document.getElementById("minBlack").innerHTML = "Minimum: "+minBlack+" °C";
+
+      document.getElementById("dateRed").innerHTML = "Čas poslední aktualizace: "+new Date(timeRed);
+      document.getElementById("aktualRed").innerHTML = "Aktuální: "+tempRed+" °C";
+      document.getElementById("prumerRed").innerHTML = "Průměrná: "+prumerRed+" °C";
+      document.getElementById("maxRed").innerHTML = "Maximum: "+maxRed+" °C";
+      document.getElementById("minRed").innerHTML = "Minimum: "+minRed+" °C";
+
+      document.getElementById("dateGreen").innerHTML = "Čas poslední aktualizace: "+new Date(timeGreen);
+      document.getElementById("aktualGreen").innerHTML = "Aktuální: "+tempGreen+" °C";
+      document.getElementById("prumerGreen").innerHTML = "Průměrná: "+prumerGreen+" °C";
+      document.getElementById("maxGreen").innerHTML = "Maximum: "+maxGreen+" °C";
+      document.getElementById("minGreen").innerHTML = "Minimum: "+minGreen+" °C";
+
+      document.getElementById("datePink").innerHTML = "Čas poslední aktualizace: "+new Date(timePink);
+      document.getElementById("aktualPink").innerHTML = "Aktuální: "+tempPink+" °C";
+      document.getElementById("prumerPink").innerHTML = "Průměrná: "+prumerPink+" °C";
+      document.getElementById("maxPink").innerHTML = "Maximum: "+maxPink+" °C";
+      document.getElementById("minPink").innerHTML = "Minimum: "+minPink+" °C";
+
+    }
+
+
+    </script>
+
+    </head>
+    <style>
+
+      body{
+        background: #FFFFFF;
+        font-family: Lucida Console;
+
+      }
+      h1{
+        font-size: 4vh;
+      }
+      .boxes{
+        text-align: center;
+        position: relative;
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+
+      .box{
+        width: 45vw;
+        height: 40vh;
+        position: relative;
+        float:top;
+        margin: 4vh 1vw 1vw 1vw;
+        display: inline-block;
+        background: #EFFFFA;
+        text-align: center;
+        border-radius: 5px;
+        box-shadow: 1px 1px 10px rgba(0,0,0,0.15), 1px 1px 10px rgba(0,0,0,0.20);
+      }
+      .box:hover{
+        box-shadow: 1px 14px 28px rgba(0,0,0,0.25), 1px 10px 10px rgba(0,0,0,0.22);
+      }
+      #blueBox{
+
+        border-top: 10px solid #0086b3;
+        text-align: center;
+      }
+      #blackBox{
+        border-top: 10px solid #333333;
+      }
+      #redBox{
+        border-top: 10px solid #b3003b;
+      }
+      #pinkBox{
+        border-top: 10px solid #ff4da6;
+      }
+      #greenBox{
+        border-top: 10px solid #698F3F;
+      }
+      p{
+        margin-top: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+    }
+
+
+
+    </style>
+
+    <body onload='onload();'>
+      <div class="boxes">
+
+        <div id="blueBox" class="box">
+          <h1>Blue Team</h1>
+          <p id="dateBlue"></p>
+          <p id="aktualBlue"></p>
+          <p id="prumerBlue"></p>
+          <p id="maxBlue"></p>
+          <p id="minBlue"></p>
+
+        </div>
+
+
+        <div id="blackBox" class="box">
+          <h1>Black Team</h1>
+          <p id="dateBlack"></p>
+          <p id="aktualBlack"></p>
+          <p id="prumerBlack"></p>
+          <p id="maxBlack"></p>
+          <p id="minBlack"></p>
+        </div>
+
+
+        <div id="redBox" class="box">
+          <h1>Red Team</h1>
+          <p id="dateRed"></p>
+          <p id="aktualRed"></p>
+          <p id="prumerRed"></p>
+          <p id="maxRed"></p>
+          <p id="minRed"></p>
+
+        </div>
+
+        <div id="pinkBox" class="box">
+          <h1>Pink Team</h1>
+          <p id="datePink"></p>
+          <p id="aktualPink"></p>
+          <p id="prumerPink"></p>
+          <p id="maxPink"></p>
+          <p id="minPink"></p>
+        </div>
+
+        <div id="greenBox" class="box">
+          <h1>Green Team</h1>
+          <p id="dateGreen"></p>
+          <p id="aktualGreen"></p>
+          <p id="prumerGreen"></p>
+          <p id="maxGreen"></p>
+          <p id="minGreen"></p>
+        </div>
+
+
+      </div>
+
+
+    </body>
+</html>
